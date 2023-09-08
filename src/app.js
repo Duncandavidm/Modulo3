@@ -26,3 +26,13 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+// src/routes/users.js
+const express = require('express');
+const router = express.Router();
+const { getUsers } = require('../controllers/userController');
+const { authenticate } = require('../middleware/authMiddleware');
+
+// Proteger la ruta /api/users usando el middleware de autenticación
+router.get('/', authenticate, getUsers);
+
+module.exports = router;
